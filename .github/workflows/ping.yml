@@ -1,0 +1,16 @@
+name: ARKAESYS Keep-Alive Ping
+
+on:
+  schedule:
+    # This cron syntax runs every 5 minutes, Monday through Friday
+    - cron: "*/5 * * * 1-5"
+  workflow_dispatch: # Allows you to run it manually if needed
+
+jobs:
+  ping_server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping PythonAnywhere Endpoint
+        run: |
+          echo "Pinging laminebakel.pythonanywhere.com..."
+          curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" https://laminebakel.pythonanywhere.com/
